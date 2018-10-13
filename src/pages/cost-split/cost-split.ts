@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ToastController, AlertController } from 'ionic-angular';
 import { SpendingProvider } from '../../providers/spending/spending';
 
 /**
@@ -24,6 +24,7 @@ export class CostSplitPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
+    private alertCtrl: AlertController,
     private spendingProvider: SpendingProvider,
     private toastCtrl: ToastController) {
     this.events.subscribe("CostSplitPageReload", data => {
@@ -39,7 +40,36 @@ export class CostSplitPage {
   }
 
   onClickAddExpense() {
-    this.navCtrl.push("AddSpendPage");
+    let alert = this.alertCtrl.create({
+      title: 'New Expense',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name this expense'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.spendingProvider.createExpense({ name: data.name }).subscribe(data => {
+              this.events.publish("CostSplitPageReload",true);
+              let toast = this.toastCtrl.create({
+                message: 'Expense was added successfully',
+                duration: 3000,
+                position: 'top'
+              });
+              toast.present();
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   onClickExpenseDetail() {

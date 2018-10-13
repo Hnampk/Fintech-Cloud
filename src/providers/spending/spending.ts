@@ -23,4 +23,8 @@ export class SpendingProvider {
     return this.http.get(API.ENDPOINT+'/spending?page=0&size=99999');
   }
 
+  deleteExpense(id){
+    return this.http.delete(API.ENDPOINT+'/spending/'+id);
+  }
+
 }

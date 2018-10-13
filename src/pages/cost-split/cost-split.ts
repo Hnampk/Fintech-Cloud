@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ToastController } from 'ionic-angular';
 import { SpendingProvider } from '../../providers/spending/spending';
 
 /**
@@ -24,15 +24,16 @@ export class CostSplitPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
-    private spendingProvider: SpendingProvider) {
-      this.events.subscribe("CostSplitPageReload", data=>{
-        this.ionViewDidLoad();
-      })
+    private spendingProvider: SpendingProvider,
+    private toastCtrl: ToastController) {
+    this.events.subscribe("CostSplitPageReload", data => {
+      this.ionViewDidLoad();
+    })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CostSplitPage');
-    this.spendingProvider.getExpense().subscribe((data:any) => {
+    this.spendingProvider.getExpense().subscribe((data: any) => {
       this.expenses = data.content;
     })
   }
@@ -43,5 +44,17 @@ export class CostSplitPage {
 
   onClickExpenseDetail() {
     this.navCtrl.push("ExpenseDetailPage");
+  }
+
+  delete(expense) {
+    this.spendingProvider.deleteExpense(expense.id).subscribe(data => {
+      let toast = this.toastCtrl.create({
+        message: 'Expense was deleted successfully',
+        duration: 3000,
+        position: 'top'
+      });
+      this.events.publish("CostSplitPageReload", true);
+      toast.present();
+    })
   }
 }

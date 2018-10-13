@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { SpendingProvider } from '../../providers/spending/spending';
 
 /**
  * Generated class for the CostSplitPage page.
@@ -14,23 +15,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cost-split.html',
 })
 export class CostSplitPage {
-
+  expenses = [];
   mDatas = {
     menuTitle: "Expense"
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public events: Events,
+    private spendingProvider: SpendingProvider) {
+      this.events.subscribe("CostSplitPageReload", data=>{
+        this.ionViewDidLoad();
+      })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CostSplitPage');
+    this.spendingProvider.getExpense().subscribe((data:any) => {
+      this.expenses = data.content;
+    })
   }
 
-  onClickAddExpense(){
+  onClickAddExpense() {
     this.navCtrl.push("AddSpendPage");
   }
 
-  onClickExpenseDetail(){
+  onClickExpenseDetail() {
     this.navCtrl.push("ExpenseDetailPage");
   }
 }

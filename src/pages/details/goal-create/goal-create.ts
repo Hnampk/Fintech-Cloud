@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Goal } from '../../../providers/classes/goal';
 
 /**
  * Generated class for the GoalCreatePage page.
@@ -14,12 +15,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'goal-create.html',
 })
 export class GoalCreatePage {
-
+    newGoal: Goal;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.newGoal = navParams.data['goal'];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GoalCreatePage');
+    console.log(this.newGoal);
+    
   }
 
 }

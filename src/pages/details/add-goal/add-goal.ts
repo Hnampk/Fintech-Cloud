@@ -1,13 +1,8 @@
+import { Goal } from './../../../providers/classes/goal';
 import { TabStore } from './../../../state/TabStore';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ModalController, ToastController } from 'ionic-angular';
 import { TabsPage } from '../../tabs/tabs';
-/**
- * Generated class for the AddGoalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,17 +12,42 @@ import { TabsPage } from '../../tabs/tabs';
 export class AddGoalPage {
   @ViewChild(Slides) slides: Slides;
   mDatas = {
-    menuTitle: "New Saving Goal"
+    menuTitle: "New Saving Goal",
+    goalTempTotal: "vnd",
+    isShowingDatePicker: false,
+    currentDateView: new Date(),
+    onChooseStartDate: false,
+    onChooseEndDate: false
   }
+
+  newGoal: Goal;
 
   constructor(public navCtrl: NavController,
     private tabStore: TabStore,
     private modalCtrl: ModalController,
+    private mToastController: ToastController,
     public navParams: NavParams) {
+    this.newGoal = new Goal();
+  }
+
+  ionViewWillEnter() {
+
+    this.tabBarElement = document.getElementsByClassName('show-tabbar').item(0);
+    console.log(this.tabBarElement);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddGoalPage');
+    console.log(this.newGoal);
+
+  }
+
+  isComplete() {
+    return this.newGoal.name
+      && this.newGoal.totalTarget
+      && this.newGoal.currentSaving
+      && this.newGoal.startDate
+      && this.newGoal.endDate
   }
 
   onClickBack() {
@@ -35,13 +55,85 @@ export class AddGoalPage {
     this.navCtrl.setRoot(TabsPage);
   }
 
-  onClickNext(){
-    this.slides.slideTo(2, 500);
+  onClickNext() {
+    console.log(this.newGoal);
+
+    if (this.isComplete())
+      this.slides.slideTo(2, 500);
+    else {
+      let toast = this.mToastController.create({
+        message: 'Please fill all the fields',
+        duration: 2000,
+        position: 'bottom'
+      });
+
+      toast.present();
+    }
   }
 
-  onClickConfirm(){
-    let profileModal = this.modalCtrl.create("GoalCreatePage");
+  onClickConfirm() {
+    let profileModal = this.modalCtrl.create("GoalCreatePage", { "goal": this.newGoal });
     profileModal.present();
   }
 
+  onCancelDatePicker() {
+    this.showTabbar();
+    this.mDatas.isShowingDatePicker = false;
+    this.mDatas.onChooseEndDate = false;
+    this.mDatas.onChooseStartDate = false;
+  }
+
+  
+  onClickStartDate() {
+    this.onShowDatePicker();
+    this.mDatas.onChooseStartDate = true;
+  }
+
+  onClickEndDate() {
+    this.onShowDatePicker();
+    this.mDatas.onChooseEndDate = true;
+  }
+
+  tabBarElement
+  onShowDatePicker() {
+    this.hideTabbar();
+    this.mDatas.isShowingDatePicker = true;
+  }
+
+  onDatePickerChanged(data) {
+    this.showTabbar();
+    this.mDatas.isShowingDatePicker = false;
+    
+    if(this.mDatas.onChooseStartDate){
+      this.newGoal.startDate = new Date(data['year'], data['month'] - 1, data['date']).getTime();
+    }
+    
+    if(this.mDatas.onChooseEndDate){
+      this.newGoal.endDate = new Date(data['year'], data['month'] - 1, data['date']).getTime();
+    }
+
+
+    this.mDatas.onChooseEndDate = false;
+    this.mDatas.onChooseStartDate = false;
+  }
+
+  hideTabbar(){
+    if(this.tabBarElement && this.tabBarElement.classList.contains("show-tabbar")){
+      this.tabBarElement.classList.remove("show-tabbar")
+    }
+  }
+
+  showTabbar(){
+    if(this.tabBarElement && !this.tabBarElement.classList.contains("show-tabbar")){
+      this.tabBarElement.classList.add("show-tabbar")
+    }
+  }
+
+  fromMillisToDate(millis: number){
+    if(millis){
+      let date = new Date(millis);
+      return (date.getDate() + 1) + "/" + date.getMonth() + "/" + date.getFullYear();
+    }
+    return null;
+  }
 }

@@ -3,15 +3,21 @@ import { MemberTarget } from "./target";
 import { User } from "./user";
 
 
-export class Goal{
+export class  Goal{
     id: string;
     name: string;
     startDate: number;
     endDate: number;
-    totalTarget: number;
+    totalTarget: number = null;
+    currentSaving: number = null;
     logs: Array<AppLog> = [];
     memberTargets: Array<MemberTarget> = []
-    membersArray: Array<User>
+    membersArray: Array<User> = [];
+
+    constructor(){
+        this.id = "";
+        this.name = "";
+    }
 }
 
 export class BrieflyGoal{

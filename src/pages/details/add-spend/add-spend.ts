@@ -11,7 +11,7 @@ import { SpendingProvider } from '../../../providers/spending/spending';
 export class AddSpendPage {
   name: string;
   mDatas = {
-    menuTitle: "Add Spend"
+    menuTitle: "New Spend"
   }
 
   constructor(

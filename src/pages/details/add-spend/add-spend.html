@@ -3,20 +3,55 @@
     <ion-toolbar>
         <ion-buttons start left (click)="onClickBack()">
             <button ion-button navPop>
-                <ion-icon name="ios-arrow-back-outline"></ion-icon>
-            </button>
+<ion-icon name="ios-arrow-back-outline"></ion-icon>
+    </button>
         </ion-buttons>
         <ion-title>{{mDatas.menuTitle}}</ion-title>
     </ion-toolbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
-    <ion-item>
-        <ion-label color="primary" floating>Name</ion-label>
-        <ion-input [(ngModel)]="name"></ion-input>
-    </ion-item>
-    <button ion-button (click)="save()">Save</button>
-    <button ion-button (click)="cancel()">Cancel</button>
+    <ion-list>
+        <ion-item>
+            <ion-input type="text" placeholder="Give it a name"></ion-input>
+        </ion-item>
+        <p ion-text class="date">13/10/2018</p>
+    </ion-list>
+
+    <ion-grid>
+        <ion-row style="background-color: rgb(214, 213, 213)">
+            <ion-col class="a3-container-center">
+            </ion-col>
+            <ion-col class="a3-container-center">
+            Has paid
+            </ion-col>
+            <ion-col class="a3-container-center">
+            Must paid
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="a3-container-center">
+                You
+            </ion-col>
+            <ion-col class="a3-container-center">
+            $200
+            </ion-col>
+            <ion-col class="a3-container-center">
+            $150
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="a3-container-center">
+                Vinh
+            </ion-col>
+            <ion-col class="a3-container-center">
+            $100
+            </ion-col>
+            <ion-col class="a3-container-center">
+            0
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

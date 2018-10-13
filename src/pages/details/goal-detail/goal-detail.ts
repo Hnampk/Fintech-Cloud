@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../../tabs/tabs';
+import { TabStore } from '../../../state/TabStore';
 
 /**
  * Generated class for the GoalDetailPage page.
@@ -20,7 +21,9 @@ export class GoalDetailPage {
     menuTitle: "Goal Detail"
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    private tabStore: TabStore,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -28,6 +31,7 @@ export class GoalDetailPage {
   }
 
   onClickBack(){
-    this.navCtrl.setRoot("TabsPage");
+    this.tabStore.update(1);
+    this.navCtrl.setRoot(TabsPage);
   }
 }

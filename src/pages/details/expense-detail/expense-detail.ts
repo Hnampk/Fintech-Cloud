@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../../tabs/tabs';
+import { TabStore } from '../../../state/TabStore';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,9 @@ export class ExpenseDetailPage {
     menuTitle: "Expense Detail"
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    private tabStore: TabStore,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -21,6 +24,7 @@ export class ExpenseDetailPage {
   }
 
   onClickBack(){
+    this.tabStore.update(0);
     this.navCtrl.setRoot(TabsPage);
   }
 }

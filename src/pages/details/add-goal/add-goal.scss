@@ -1,3 +1,32 @@
 page-add-goal {
-
+    .image-container{
+        padding: 80px 0;
+    }
+    .icon-container{
+        font-size: 6em;
+    }
+    input{
+        border-bottom: 1px solid;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-left: 4px;
+    }
+    .form-info{
+        font-size: 1rem;
+        .my-form{
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    }
+    .question{
+        padding: 40px 0;
+    }
+    .button-container{
+        .bottom-button{
+            margin-top: 40px;
+            width: 80%;
+            border-radius: 10px;
+        }
+    }
 }

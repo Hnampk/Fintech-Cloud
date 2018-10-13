@@ -3,8 +3,8 @@
     <ion-toolbar>
         <ion-buttons start left (click)="onClickBack()">
             <button ion-button navPop>
-  <ion-icon name="ios-arrow-back-outline"></ion-icon>
-      </button>
+                <ion-icon name="ios-arrow-back-outline"></ion-icon>
+            </button>
         </ion-buttons>
         <ion-title>{{mDatas.menuTitle}}</ion-title>
     </ion-toolbar>
@@ -13,5 +13,52 @@
 
 
 <ion-content padding>
+    <div class="image-container a3-container a3-justify-center">
+        <div class="icon-container">
+            <ion-icon name="ios-body-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div>
+        <ion-slides>
+            <ion-slide>
+                <div>
+                    <div class="form-info">
+                        <div class="my-form">
+                            <span>You need</span>
+                            <input type="text">
+                        </div>
+                        <div class="my-form">
+                            <span>for</span>
+                            <input type="text">
+                        </div>
+                        <div class="my-form">
+                            <span>Currently you have</span>
+                            <input type="number">
+                        </div>
+                        <div class="my-form">
+                            <span>You plan start from</span>
+                            <input type="text">
+                            <span>to</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="button-container a3-container-center">
+                        <button ion-button class="bottom-button" full color="dark" (click)="onClickNext()"> Looks good!
+                            Next</button>
+                    </div>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="question">DO YOU HAVE A PARTNER?</div>
+
+                <div class="button-container a3-container-center">
+                    <button ion-button class="bottom-button" full color="dark" (click)="onClickConfirm()">Only me for this</button>
+                    <button ion-button class="bottom-button" full color="dark" (click)="onClickConfirm()">Yes, i have</button>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
 
 </ion-content>

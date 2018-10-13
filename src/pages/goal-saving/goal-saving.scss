@@ -1,3 +1,48 @@
 page-goal-saving {
-
+    .tab-container {
+        width: 100%;
+        margin-bottom: 16px;
+        .n-tab-item{
+            border: 1px solid;
+            padding: 10px;
+            flex: 1;
+        }
+        .n-tab-item-selected{
+            background-color: #8eb2f1;
+        }
+    }
+    .goals-container{
+        .goal-briefly{
+            border: 1px solid;
+            margin-bottom: 10px;
+            .goal-info{
+                flex: 4;
+                .goal-name{
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+                .goal-more-info{
+                    font-size: .9em;
+                }
+            }
+            .goal-icon{
+                flex: 1;
+                ion-icon{
+                    font-size: 1.8em;
+                }
+                .goal-total-member{
+                    .value{
+                        margin-top: -20px;
+                        margin-right: -20px;
+                        padding: 2px;
+                        border: 1px solid;
+                        background: white;
+                    }
+                }
+            }
+        }
+        .hidden{
+            display: none;
+        }
+    }
 }

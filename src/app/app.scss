@@ -638,3 +638,28 @@ $line-height: 20px;
 }
 
 // ===============================End Flex CSS=========================================
+
+.add-button{
+    border-radius: 50%;
+    border: 1px solid;
+    width: 12vw;
+    height: 12vw;
+    font-size: 1.6em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    position: absolute;
+    z-index: 100;
+    bottom: 60px;
+    right: 20px;
+    background-color: white;
+}

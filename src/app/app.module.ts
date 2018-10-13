@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabStore } from '../state/TabStore';
+import { AppControllerProvider } from '../providers/app-controller/app-controller';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TabStore } from '../state/TabStore';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TabStore
+    TabStore,
+    AppControllerProvider
   ]
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
+import { TabStore } from './../../state/TabStore';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -19,7 +20,9 @@ export class CostSplitPage {
     menuTitle: "Expense"
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    private tabStore: TabStore,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -27,10 +30,12 @@ export class CostSplitPage {
   }
 
   onClickAddExpense(){
+    this.tabStore.update(0);
     this.navCtrl.push("AddSpendPage");
   }
 
   onClickExpenseDetail(){
+    this.tabStore.update(0);
     this.navCtrl.push("ExpenseDetailPage");
   }
 }

@@ -37,8 +37,8 @@ export class ExpenseDetailPage {
     }
 
 
-    // this.spendingProvider.getExpenseDetail(this.mDatas.expenseId).subscribe((data: any) => {
-    this.spendingProvider.getExpenseDetail(23).subscribe((data: any) => {
+    this.spendingProvider.getExpenseDetail(this.mDatas.expenseId).subscribe((data: any) => {
+    // this.spendingProvider.getExpenseDetail(23).subscribe((data: any) => {
       data.forEach(bill => {
         let newBill = new Bill();
 
@@ -58,7 +58,6 @@ export class ExpenseDetailPage {
     this.navCtrl.setRoot(TabsPage);
   }
   onClickSplitCost(){
-    console.log("onClickSplitCost");
     
   }
 

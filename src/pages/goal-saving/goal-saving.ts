@@ -315,4 +315,8 @@ export class GoalSavingPage {
     this.tabStore.update(1);
     this.navCtrl.push("GoalDetailPage");
   }
+  onClickGoal(goal){
+    console.log(goal);
+    
+  }
 }

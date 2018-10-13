@@ -8,14 +8,42 @@
 
 
 <ion-content no-bounce padding>
-    <div>
+    <div class="direct-tab">
         <div class="tab-container a3-container">
-            <div class="n-tab-item a3-container-center" (click)="onClickIndividual()" [class.n-tab-item-selected]="currentTab==1">Individual</div>
-            <div class="n-tab-item a3-container-center" (click)="onClickGroup()" [class.n-tab-item-selected]="currentTab==2">Group</div>
+            <div class="n-tab-item a3-container-center left-tab" (click)="onClickIndividual()" [class.n-tab-item-selected]="currentTab==1">Individual</div>
+            <div class="n-tab-item a3-container-center right-tab" (click)="onClickGroup()" [class.n-tab-item-selected]="currentTab==2">Group</div>
         </div>
     </div>
 
-    <div class="goals-container a3-flex-1">
+    <div class="a1-fill-parent" style="overflow: auto; padding-top: 40px">
+        <ion-list>
+            <ion-item-sliding class="item-container" [class.hidden]="(goal.membersArray.length>1&&currentTab==1) || (goal.membersArray.length==1&&currentTab==2)" *ngFor="let goal of goals" (click)="onClickGoal(goal)">
+                <ion-item>
+                    <div class="a3-container">
+                        <div class="goal-info text-color cus-title">
+                            <div class="goal-name">{{goal.name}}</div>
+                            <div class="goal-more-info">due: {{goal.endDate}}</div>
+                            <div class="goal-more-info">{{goal.totalSaved}} was saved</div>
+                        </div>
+                        <div *ngIf="goal.membersArray.length >1" class="goal-icon a3-container-center a1-relative">
+                            <ion-icon name="ios-person"></ion-icon>
+                            <div class="goal-total-member a1-absolute a1-fill-parent a3-container-center">
+                                <span class="value">{{goal.membersArray.length}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item-options side="left">
+                    <button ion-button class="bg-theme2" (click)="delete(bill)">Delete</button>
+                </ion-item-options>
+                <ion-item-options side="right">
+                    <button ion-button class="bg-theme2" (click)="delete(bill)">Delete</button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
+
+    <!-- <div class="goals-container a3-flex-1">
         <div class="goal-briefly" [class.hidden]="(goal.membersArray.length>1&&currentTab==1) || (goal.membersArray.length==1&&currentTab==2)"
             *ngFor="let goal of goals">
             <div class="a1-fill-parent a3-container" style="margin: 10px">
@@ -32,7 +60,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 </ion-content>

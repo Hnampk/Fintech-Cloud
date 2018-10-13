@@ -9,9 +9,22 @@ import { TabsPage } from '../../tabs/tabs';
 })
 export class ExpenseDetailPage {
 
+  
   mDatas = {
-    menuTitle: "Expense Detail"
+    menuTitle: "Expense Detail",
+    number:"5"
   }
+  items = [
+    'Pokémon Yellow',
+    'Super Metroid',
+    'Mega Man X',
+    'The Legend of Zelda',
+    'Pac-Man'
+  ];
+  itemSelected(item: string) {
+    console.log("Selected Item", item);
+  }
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -24,3 +37,4 @@ export class ExpenseDetailPage {
     this.navCtrl.setRoot(TabsPage);
   }
 }
+

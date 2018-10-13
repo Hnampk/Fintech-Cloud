@@ -11,7 +11,32 @@
 
 </ion-header>
 
-
+  
 <ion-content padding>
+    <ion-list>
+        <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+            <!-- <h2> {{item}}</h2>
+            <div  style="width: 80%" >
+                <p>Capital: "HN", Region: VL</p>
+            </div>
+            <div style="width:20%">
+              <ion-icon name="people"></ion-icon>
+            </div> -->
 
+            <div id="post"style="width: 80%"> 
+                    <h2> {{item}}</h2>
+                    <p>Capital: "HN", Region: VL</p>
+            </div>
+            <!-- <div id="sidebar"style="width: 20%"> -->
+                    <ion-icon name="people">: {{mDatas.number}}</ion-icon>
+            <!-- </div> -->
+        </button>
+    </ion-list>
+    <div style="text-align:center">
+        <button ion-button>Split Cost Now</button>
+        <button ion-button>New Spend</button>
+    </div>
+
+        
 </ion-content>
+

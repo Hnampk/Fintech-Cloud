@@ -13,6 +13,24 @@
 
 
 <ion-content padding>
-    <button ion-button (click)="onClickAddExpense()">Add Expense</button>
-    <button ion-button (click)="onClickExpenseDetail()">Expense Detail</button>
+    <ion-list>
+        <ion-item-sliding *ngFor="let expense of expenses">
+            <ion-item (click)="onClickExpenseDetail()">
+                <p>{{expense.name}}
+                </p>
+                <small>{{expense.createdDate | date: 'dd/MM/yyyy'}}</small>
+                <ion-badge item-end *ngIf="expense.total==0">All Paid</ion-badge>
+                <ion-badge item-end color="danger" *ngIf="expense.total!=0">Pending</ion-badge>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button color="danger" (click)="delete(expense)">Delete</button>
+            </ion-item-options>
+            <ion-item-options side="right">
+                <button ion-button color="danger" (click)="delete(expense)">Delete</button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab (click)="onClickAddExpense()">Add</button>
+    </ion-fab>
 </ion-content>

@@ -2,31 +2,39 @@
     <ion-toolbar>
         <ion-buttons start left (click)="onClickBack()">
             <button ion-button navPop>
-               <ion-icon name="ios-arrow-back-outline"></ion-icon>
+                <ion-icon name="ios-arrow-back-outline"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons start right (click)="onClickSplitCostNow()">
-            <button>
-                <a class="button button-icon icon ion-settings">Split Cost Now</a>
-            </button>
-        </ion-buttons>
-        <!-- <a class="button button-icon  ion-settings"></a> -->
-        <ion-title>{{mDatas.menuTitle}}</ion-title>
+        <ion-title>{{mDatas.expenseName}}</ion-title>
     </ion-toolbar>
 </ion-header>
-  
+
 <ion-content padding>
     <ion-list>
-        <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-            <div id="post"style="width: 80%"> 
-                <h2> {{item}}</h2>
-                <p>Capital: "HN", Region: VL</p>
-            </div>
-                <ion-icon name="people">: {{mDatas.number}}</ion-icon>
-        </button>
+        <ion-item-sliding class="item-container" *ngFor="let bill of bills" (click)="onClickBill(bill)">
+            <ion-item>
+                <div class="a3-container">
+                    <div class="bill-info text-color cus-title">
+                        <div class="bill-name">{{bill.name}}</div>
+                        <div class="bill-more-info">{{bill.createdDate | date: 'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="bill-icon a3-container-center a1-relative">
+                        <ion-icon name="ios-person"></ion-icon>
+                        <div class="bill-total-member a1-absolute a1-fill-parent a3-container-center">
+                            <div class="value">{{bill.payments.length}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button class="bg-theme2" (click)="delete(bill)">Delete</button>
+            </ion-item-options>
+            <ion-item-options side="right">
+                <button ion-button class="bg-theme2" (click)="delete(bill)">Delete</button>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
-    <div style="text-align:center">
-        <button ion-button (click)="onClickAddSpendPage()">New Spend</button>
+    <div class="blue-button-container">
+        <div class="main-button">New Spend</div>
     </div>
 </ion-content>
-

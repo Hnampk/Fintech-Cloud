@@ -73,8 +73,8 @@ export class CostSplitPage {
     alert.present();
   }
 
-  onClickExpenseDetail() {
-    this.navCtrl.push("ExpenseDetailPage");
+  onClickExpenseDetail(expense) {
+    this.navCtrl.push("ExpenseDetailPage", {id: expense.id, name: expense.name});
   }
 
   delete(expense) {

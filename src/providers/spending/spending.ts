@@ -27,4 +27,8 @@ export class SpendingProvider {
     return this.http.delete(API.ENDPOINT+'/spending/'+id);
   }
 
+  getExpenseDetail(id){
+    return this.http.get(API.ENDPOINT + '/spending/'+ id + '/detail');
+  }
+
 }

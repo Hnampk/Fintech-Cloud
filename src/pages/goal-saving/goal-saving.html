@@ -1,24 +1,21 @@
 <ion-header>
 
     <ion-toolbar>
-        <!-- <ion-buttons start left>
-      <button ion-button navPop>
-  <ion-icon name="ios-arrow-back-outline"></ion-icon> -->
-        <!-- </button>
-    </ion-buttons> -->
         <ion-title>{{mDatas.menuTitle}}</ion-title>
     </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
-    <div class="tab-container a3-container">
-        <div class="n-tab-item a3-container-center" (click)="onClickIndividual()" [class.n-tab-item-selected]="currentTab==1">Individual</div>
-        <div class="n-tab-item a3-container-center" (click)="onClickGroup()" [class.n-tab-item-selected]="currentTab==2">Group</div>
+<ion-content no-bounce padding>
+    <div>
+        <div class="tab-container a3-container">
+            <div class="n-tab-item a3-container-center" (click)="onClickIndividual()" [class.n-tab-item-selected]="currentTab==1">Individual</div>
+            <div class="n-tab-item a3-container-center" (click)="onClickGroup()" [class.n-tab-item-selected]="currentTab==2">Group</div>
+        </div>
     </div>
 
-    <div class="goals-container">
+    <div class="goals-container a3-flex-1">
         <div class="goal-briefly" [class.hidden]="(goal.membersArray.length>1&&currentTab==1) || (goal.membersArray.length==1&&currentTab==2)"
             *ngFor="let goal of goals">
             <div class="a1-fill-parent a3-container" style="margin: 10px">

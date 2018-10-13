@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { TabStore } from '../../state/TabStore';
 @Component({
+  selector: 'my-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
@@ -9,7 +10,6 @@ export class TabsPage {
 
   tab1Root = "CostSplitPage";
   tab2Root = "GoalSavingPage";
-  tab3Root = "NotiPage";
   tab4Root = "MorePage";
 
   constructor(private tabStore: TabStore) {

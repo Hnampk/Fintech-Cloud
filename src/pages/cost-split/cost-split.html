@@ -1,11 +1,6 @@
 <ion-header>
 
     <ion-toolbar>
-        <!-- <ion-buttons start left>
-            <button ion-button navPop>
-        <ion-icon name="ios-arrow-back-outline"></ion-icon>
-      </button>
-        </ion-buttons> -->
         <ion-title>{{mDatas.menuTitle}}</ion-title>
     </ion-toolbar>
 
@@ -13,10 +8,10 @@
 
 
 <ion-content padding>
-    <h1 class="text-color" style="margin-left: 15px;">Expense</h1>
+    <!-- <h1 class="text-color" style="margin-left: 15px;">{{mDatas.menuTitle}}</h1> -->
     <ion-list>
         <ion-item-sliding *ngFor="let expense of expenses">
-            <ion-item (click)="onClickExpenseDetail()">
+            <ion-item (click)="onClickExpenseDetail(expense)">
                 <p class="cus-title text-color">{{expense.name}} </p>
                 <small class="text-color">{{expense.createdDate | date: 'dd/MM/yyyy'}}</small>
                 <ion-badge item-end class="cost-split-status bg-theme2" *ngIf="expense.total==0">All Paid</ion-badge>

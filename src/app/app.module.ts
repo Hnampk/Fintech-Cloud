@@ -10,6 +10,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabStore } from '../state/TabStore';
 import { AppControllerProvider } from '../providers/app-controller/app-controller';
+import { SpendingProvider } from '../providers/spending/spending';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { AppControllerProvider } from '../providers/app-controller/app-controlle
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -30,7 +33,7 @@ import { AppControllerProvider } from '../providers/app-controller/app-controlle
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TabStore,
-    AppControllerProvider
+    SpendingProvider
   ]
 })
 export class AppModule {}

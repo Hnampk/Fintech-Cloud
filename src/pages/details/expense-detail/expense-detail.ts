@@ -10,9 +10,22 @@ import { TabStore } from '../../../state/TabStore';
 })
 export class ExpenseDetailPage {
 
+  
   mDatas = {
-    menuTitle: "Expense Detail"
+    menuTitle: "Expense Detail",
+    number:"5"
   }
+  items = [
+    'Pokémon Yellow',
+    'Super Metroid',
+    'Mega Man X',
+    'The Legend of Zelda',
+    'Pac-Man'
+  ];
+  itemSelected(item: string) {
+    console.log("Selected Item", item);
+  }
+
 
   constructor(public navCtrl: NavController,
     private tabStore: TabStore,
@@ -27,4 +40,11 @@ export class ExpenseDetailPage {
     this.tabStore.update(0);
     this.navCtrl.setRoot(TabsPage);
   }
+  onClickSplitCostNow(){
+    console.log("click");
+  }
+  onClickAddSpendPage() {
+    this.navCtrl.push("AddSpendPage");
+  }
 }
+

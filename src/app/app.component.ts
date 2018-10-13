@@ -9,11 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-<<<<<<< HEAD
-  rootPage:any = "ExpenseDetailPage";
-=======
-  rootPage:any = "AddSpendPage";
->>>>>>> 9d93445b45f70d15a0c941ac152a376df3f8f455
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

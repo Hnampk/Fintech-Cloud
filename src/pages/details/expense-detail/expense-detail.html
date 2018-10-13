@@ -5,7 +5,7 @@
                <ion-icon name="ios-arrow-back-outline"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons start right (click)="onClickBack()">
+        <ion-buttons start right (click)="onClickSplitCostNow()">
             <button>
                 <a class="button button-icon icon ion-settings">Split Cost Now</a>
             </button>
@@ -26,7 +26,7 @@
         </button>
     </ion-list>
     <div style="text-align:center">
-        <button ion-button>New Spend</button>
+        <button ion-button (click)="onClickAddSpendPage()">New Spend</button>
     </div>
 </ion-content>
 

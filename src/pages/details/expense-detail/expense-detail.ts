@@ -36,5 +36,11 @@ export class ExpenseDetailPage {
   onClickBack(){
     this.navCtrl.setRoot(TabsPage);
   }
+  onClickSplitCostNow(){
+    console.log("click");
+  }
+  onClickAddSpendPage() {
+    this.navCtrl.push("AddSpendPage");
+  }
 }
 

@@ -20,21 +20,27 @@ export class Bill{
     payments: Array<Payment> = [];
     createdDate: string;
 
-    constructor(id: string, name: string, totalCost: number, createdDate: string){
+    constructor(){
+        this.id = "";
+        this.name = "";
+        this.totalCost = 0;
+        this.createdDate = "";
+    }
+
+    onResponseData(id: string, name: string, totalCost: number, createdDate: string,payments){
         this.id = id;
         this.name = name;
         this.totalCost = totalCost;
         this.createdDate = createdDate;
-    }
-
-    onResponseData(payments){
-        payments.forEach(element => {
-            let payment = new Payment(element.id, element.mustPay, element.hasPay);
-            
-            payment.setOwner(element.user);
-
-            this.payments.push(payment);
-        });
+        if(payments && (payments.length >=0)){
+            payments.forEach(element => {
+                let payment = new Payment(element.id, element.mustPay, element.hasPay);
+                
+                payment.setOwner(element.user);
+    
+                this.payments.push(payment);
+            });
+        }
     }
 
 }

@@ -1,15 +1,37 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons start left (click)="onClickBack()">
-            <button ion-button navPop>
-                <ion-icon name="ios-arrow-back-outline"></ion-icon>
-            </button>
-        </ion-buttons>
-        <ion-title>{{mDatas.expenseName}}</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons start left (click)="onClickBack()">
+      <button ion-button>
+        <ion-icon name="ios-arrow-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{mDatas.title}}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-
+  <h1 class="text-color">{{bill.name}}</h1>
+  <div class="text-color">{{bill.createdDate | date:'dd/MM/yyyy'}}</div>
+  <div class="text-color a3-container-center">Total Cost</div>
+  <div class="value a3-container-center">{{bill.totalCost | currency:'VND':'symbol':'0.0-0'}}</div>
+  <ion-grid>
+    <ion-row class="first-row">
+      <ion-col col-4></ion-col>
+      <ion-col col-4 class=" a3-container-center">Has Paid</ion-col>
+      <ion-col col-4 class=" a3-container-center">Must Pay</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let payment of bill.payments; let i = index" [class.odd-row]="i%2==0">
+      <ion-col col-4 class="a3-container a3-justify-end text-color">{{payment.owner.name}}</ion-col>
+      <ion-col col-4 class="money a3-container-center">{{payment.hasPaid | currency:'VND':'symbol':'0.0-0'}}</ion-col>
+      <ion-col col-4 class="money a3-container-center">{{payment.mustPay | currency:'VND':'symbol':'0.0-0'}}</ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="more-member-button" (click)="onClickAddMember()">
+    <ion-icon name="ios-add-outline" style="font-weight: bold"></ion-icon>
+    <span>More Member</span>
+  </div>
+  <div class="blue-button-container" (click)="onClickBack()">
+      <div class="main-button">OK</div>
+  </div>
 </ion-content>

@@ -39,12 +39,10 @@ export class ExpenseDetailPage {
 
     // this.spendingProvider.getExpenseDetail(this.mDatas.expenseId).subscribe((data: any) => {
     this.spendingProvider.getExpenseDetail(23).subscribe((data: any) => {
-      console.log(data);
-
       data.forEach(bill => {
-        let newBill = new Bill(bill.id, bill.description, bill.amount, bill.createdDate);
+        let newBill = new Bill();
 
-        newBill.onResponseData(bill.involve);
+        newBill.onResponseData(bill.id, bill.description, bill.amount, bill.createdDate, bill.involve);
         this.bills.push(newBill)
       });
 
@@ -55,19 +53,23 @@ export class ExpenseDetailPage {
     console.log('ionViewDidLoad ExpenseDetailPage');
   }
 
-  onClickBack() {    
+  onClickBack() {
     this.tabStore.update(0);
     this.navCtrl.setRoot(TabsPage);
   }
-  onClickSplitCostNow() {
-    console.log("click");
+  onClickSplitCost(){
+    console.log("onClickSplitCost");
+    
   }
-  onClickAddSpendPage() {
-    this.navCtrl.push("AddSpendPage");
-  }
+
 
   onClickBill(bill) {
     this.navCtrl.push("ExpenseBillDetailPage", { "bill": bill });
+  }
+
+  onClickAddSpend() {
+    this.navCtrl.push("AddSpendPage");
+
   }
 }
 

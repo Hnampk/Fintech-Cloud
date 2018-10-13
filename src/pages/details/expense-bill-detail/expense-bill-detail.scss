@@ -1,3 +1,23 @@
 page-expense-bill-detail {
-
+    .value{
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #FF8864;
+        margin-bottom: 20px;
+    }
+    .first-row{
+        background-color: #4F6DFF;
+        color: white;
+    }
+    .money{
+        color: #4F6DFF
+    }
+    .odd-row{
+        background-color: #F6F6F6;
+    }
+    .more-member-button{
+        color: #4F6DFF;
+        font-weight: bold;
+        margin-top: 10px;
+    }
 }

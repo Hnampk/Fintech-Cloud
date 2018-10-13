@@ -22,16 +22,16 @@ export class ExpenseBillDetailPage {
 
     if (navParams.data['bill'])
       this.bill = navParams.data['bill'];
-
-    console.log(this.bill);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ExpenseBillDetailPage');
   }
 
   onClickBack() {
     this.tabStore.update(0);
     this.navCtrl.pop();
   }
+
+  onClickAddMember(){
+    console.log("onClickAddMember");
+    
+  }
+
 }

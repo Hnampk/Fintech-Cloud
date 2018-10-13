@@ -1,57 +1,37 @@
 <ion-header>
-
     <ion-toolbar>
         <ion-buttons start left (click)="onClickBack()">
-            <button ion-button navPop>
-<ion-icon name="ios-arrow-back-outline"></ion-icon>
-    </button>
+            <button ion-button>
+                <ion-icon name="ios-arrow-back-outline"></ion-icon>
+            </button>
         </ion-buttons>
         <ion-title>{{mDatas.menuTitle}}</ion-title>
     </ion-toolbar>
-
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+    <input class="input-name text-color" type="text" [(ngModel)]="bill.name" placeholder="Give it a name...">
+    <div class="text-color">{{mDatas.currentTime | date:'dd/MM/yyyy'}}</div>
+    <div class="scan-bill a3-container-center a1-margin-top">
+        <ion-icon name="ios-camera-outline"></ion-icon>
+    </div>
+    <div class="a3-container-center" style="margin-top: 6px">Scan you bill for cost or</div>
+    <div class="a3-container-center" style="color: #4F6DFF; font-weight: bold; margin-top: 6px" (click)="onClickInput()">Input
+        yourself</div>
 
-    <ion-list>
-        <ion-item>
-            <ion-input type="text" placeholder="Give it a name"></ion-input>
-        </ion-item>
-        <p ion-text class="date">13/10/2018</p>
-    </ion-list>
-
-    <ion-grid>
-        <ion-row style="background-color: rgb(214, 213, 213)">
-            <ion-col class="a3-container-center">
-            </ion-col>
-            <ion-col class="a3-container-center">
-            Has paid
-            </ion-col>
-            <ion-col class="a3-container-center">
-            Must paid
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="a3-container-center">
-                You
-            </ion-col>
-            <ion-col class="a3-container-center">
-            $200
-            </ion-col>
-            <ion-col class="a3-container-center">
-            $150
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="a3-container-center">
-                Vinh
-            </ion-col>
-            <ion-col class="a3-container-center">
-            $100
-            </ion-col>
-            <ion-col class="a3-container-center">
-            0
-            </ion-col>
+    <ion-grid class="a1-margin-top">
+        <ion-row class="first-row">
+            <ion-col col-4></ion-col>
+            <ion-col col-4 class=" a3-container-center">Has Paid</ion-col>
+            <ion-col col-4 class=" a3-container-center">Must Pay</ion-col>
         </ion-row>
     </ion-grid>
+    <div class="more-member-button" (click)="onClickAddMember()">
+        <ion-icon name="ios-add-outline" style="font-weight: bold"></ion-icon>
+        <span>More Member</span>
+    </div>
+    <div class="blue-button-container" (click)="onClickAddSpend()">
+        <div class="main-button">Save</div>
+    </div>
+
 </ion-content>

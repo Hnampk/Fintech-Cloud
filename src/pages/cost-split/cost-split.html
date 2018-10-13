@@ -13,20 +13,20 @@
 
 
 <ion-content padding>
+    <h1 class="text-color" style="margin-left: 15px;">Expense</h1>
     <ion-list>
         <ion-item-sliding *ngFor="let expense of expenses">
             <ion-item (click)="onClickExpenseDetail()">
-                <p>{{expense.name}}
-                </p>
-                <small>{{expense.createdDate | date: 'dd/MM/yyyy'}}</small>
-                <ion-badge item-end *ngIf="expense.total==0">All Paid</ion-badge>
-                <ion-badge item-end color="danger" *ngIf="expense.total!=0">Pending</ion-badge>
+                <p class="cus-title text-color">{{expense.name}} </p>
+                <small class="text-color">{{expense.createdDate | date: 'dd/MM/yyyy'}}</small>
+                <ion-badge item-end class="cost-split-status bg-theme2" *ngIf="expense.total==0">All Paid</ion-badge>
+                <ion-badge item-end class="cost-split-status bg-theme1" *ngIf="expense.total!=0">Pending Payment</ion-badge>
             </ion-item>
             <ion-item-options side="left">
-                <button ion-button color="danger" (click)="delete(expense)">Delete</button>
+                <button ion-button class="bg-theme2" (click)="delete(expense)">Delete</button>
             </ion-item-options>
             <ion-item-options side="right">
-                <button ion-button color="danger" (click)="delete(expense)">Delete</button>
+                <button ion-button class="bg-theme2" (click)="delete(expense)">Delete</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

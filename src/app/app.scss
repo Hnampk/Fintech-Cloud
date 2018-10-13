@@ -7,6 +7,9 @@ $content-height: calc(100vh - 56px);
 $inputHeight: 40px;
 $segment-height: 50px;
 $line-height: 20px;
+$theme-color1:#4F6DFF;
+$theme-color2:#FF8864;
+$text-color:#8B8B8B;
 // ===============================Start Pure Layout CSS=======================================
 .a1-container {
     position: relative;
@@ -638,8 +641,7 @@ $line-height: 20px;
 }
 
 // ===============================End Flex CSS=========================================
-
-.add-button{
+.add-button {
     border-radius: 50%;
     border: 1px solid;
     width: 12vw;
@@ -662,4 +664,27 @@ $line-height: 20px;
     bottom: 60px;
     right: 20px;
     background-color: white;
+}
+
+.cost-split-status {
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.bg-theme1 {
+    background: $theme-color1;
+}
+
+.bg-theme2 {
+    background: $theme-color2;
+}
+
+.cus-title {
+    font-size: 18px!important;
+}
+
+.text-color {
+    color: $text-color;
 }

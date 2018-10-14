@@ -18,24 +18,24 @@ export class Bill{
     name: string;
     totalCost: number;
     payments: Array<Payment> = [];
-    createdDate: string;
+    createdDate: Date;
 
     constructor(){
         this.id = "";
         this.name = "";
         this.totalCost = 0;
-        this.createdDate = "";
+        this.createdDate = new Date();
     }
 
     onResponseData(id: string, name: string, totalCost: number, createdDate: string,payments){
         this.id = id;
         this.name = name;
         this.totalCost = totalCost;
-        this.createdDate = createdDate;
+        this.createdDate = new Date(createdDate);
         if(payments && (payments.length >=0)){
             payments.forEach(element => {
-                let payment = new Payment(element.id, element.mustPay, element.hasPay);
-                
+                let payment = new Payment();
+                payment.onResponseData(element.id, element.mustPay, element.hasPay);
                 payment.setOwner(element.user);
     
                 this.payments.push(payment);
@@ -51,7 +51,14 @@ export class Payment{
     mustPay: number;
     hasPaid: number;
 
-    constructor(id: string, mustPay: number, hasPaid: number){
+    constructor(){
+        this.id = "";
+        this.mustPay = 0;
+        this.hasPaid = 0;
+        this.owner = new User();
+    }
+
+    onResponseData(id: string, mustPay: number, hasPaid: number){
         this.id = id;
         this.mustPay = mustPay;
         this.hasPaid = hasPaid;

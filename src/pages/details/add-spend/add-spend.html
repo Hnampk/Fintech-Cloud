@@ -11,7 +11,7 @@
 
 <ion-content padding>
     <input class="input-name text-color" type="text" [(ngModel)]="bill.name" placeholder="Give it a name...">
-    <div class="text-color">{{mDatas.currentTime | date:'dd/MM/yyyy'}}</div>
+    <div class="text-color" (click)="onShowDatePicker()">{{bill.createdDate | date:'dd/MM/yyyy'}}</div>
     <div class="scan-bill a3-container-center a1-margin-top">
         <ion-icon name="ios-camera-outline"></ion-icon>
     </div>
@@ -21,9 +21,14 @@
 
     <ion-grid class="a1-margin-top">
         <ion-row class="first-row">
-            <ion-col col-4></ion-col>
+            <ion-col col-4 class="a3-container a3-justify-end">Who</ion-col>
             <ion-col col-4 class=" a3-container-center">Has Paid</ion-col>
             <ion-col col-4 class=" a3-container-center">Must Pay</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let payment of bill.payments; let i = index" [class.odd-row]="i%2==0" (click)="onEditPayment(payment)">
+          <ion-col col-4 class="a3-container a3-justify-end text-color">{{payment.owner.name}}</ion-col>
+          <ion-col col-4 class="money a3-container-center">{{payment.hasPaid | currency:'VND':'symbol':'0.0-0'}}</ion-col>
+          <ion-col col-4 class="money a3-container-center">{{payment.mustPay | currency:'VND':'symbol':'0.0-0'}}</ion-col>
         </ion-row>
     </ion-grid>
     <div class="more-member-button" (click)="onClickAddMember()">
@@ -35,3 +40,5 @@
     </div>
 
 </ion-content>
+<aw-date-picker *ngIf="mDatas.isShowingDatePicker" [time]="mDatas.currentDateView" (cancel)="onCancelDatePicker()"
+    (done)="onDatePickerChanged($event)"></aw-date-picker>

@@ -1,8 +1,26 @@
 page-goal-create {
-    .image-container{
-        
+    .scan-bill {
+        width: 100%;
+        height: 140px;
+        background-color: #F6F6F9;
+        font-size: 2.4em;
+        color: lightgray;
     }
-    .goal-info{
-        
+    .value{
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #FF8864;
+        margin-top: 20px;
+    }
+    .more-member-button{
+        color: #4F6DFF;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .odd-row{
+        background-color: #F6F6F6;
+    }
+    .money{
+        color: #4F6DFF
     }
 }

@@ -219,9 +219,10 @@ export class AddSpendPage {
     modal.onWillDismiss(data => {
       if (data) {
         let user = data['user'];
-        
-        if(this.bill.payments.filter(payment=>{return payment.owner.id == user.id}).length > 0){
-          this.onEditPayment(this.bill.payments.filter(payment=>{return payment.owner.id == user.id})[0]);
+        let doubleCheck = this.bill.payments.filter(payment=>{return payment.owner.id == user.id});
+
+        if(doubleCheck.length > 0){
+          this.onEditPayment(doubleCheck[0]);
         }else{
           this.presentPrompt(user.id, user.username);
         }

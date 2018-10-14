@@ -1,3 +1,4 @@
+import { User } from './../../../providers/classes/user';
 import { Goal } from './../../../providers/classes/goal';
 import { TabStore } from './../../../state/TabStore';
 import { Component, ViewChild } from '@angular/core';
@@ -45,7 +46,6 @@ export class AddGoalPage {
   isComplete() {
     return (this.newGoal.name != "")
       && (this.newGoal.totalTarget > -1)
-      && (this.newGoal.currentSaving > -1)
       && (this.newGoal.startDate > 0)
       && (this.newGoal.endDate > 0)
   }
@@ -74,7 +74,16 @@ export class AddGoalPage {
   onClickConfirm() {
 
     if (this.isComplete()) {
+      let me = new User();
+      me.id = "1";
+      me.name = "You";
+      this.newGoal.addMember(me, 0)
       let profileModal = this.modalCtrl.create("GoalCreatePage", { "goal": this.newGoal });
+      profileModal.onWillDismiss((success => {
+        if(success){
+          this.navCtrl.pop();
+        }
+      }))
       profileModal.present();
     }
     else {

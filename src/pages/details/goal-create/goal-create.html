@@ -1,13 +1,41 @@
 <ion-content padding>
-
-  <div class="image-container">
-    <img src="" alt="">
+  <div class="scan-bill a3-container-center a1-margin-top">
+    <ion-icon name="ios-camera-outline"></ion-icon>
   </div>
+
   <div class="goal-info">
-    <div>{{newGoal.totalTarget}}</div>
-    <div>for {{newGoal.name}}</div>
-    <div>{{newGoal.endDate - newGoal.startDate}} from {{newGoal.startDate}} to {{newGoal.endDate}}</div>
-  </div>
-  <div></div>
 
+    <div class="value a3-container-center">{{newGoal.totalTarget | currency:'VND':'symbol':'0.0-0'}}</div>
+    <div class="a3-container-center text-color" style="font-size: 1.2em"><p>for <u>{{newGoal.name}}</u></p></div>
+    <div class="a3-container-center text-color" style="font-size: .8em">
+      <span style="font-size: bold">
+        {{newGoal.endDate - newGoal.startDate}}
+      </span> 
+      <span style="padding: 8px">from</span>
+      <span style="font-size: bold">
+        {{newGoal.startDate | date:'dd/MM/yyyy'}}
+      </span>
+      <span style="padding: 8px">to</span>
+      <span style="font-size: bold">
+        {{newGoal.endDate | date:'dd/MM/yyyy'}}
+      </span>
+    </div>
+    <div>
+      <p class="text-color">You and your partners plan to contribute from the goal</p>
+      <ion-grid>
+        <ion-row *ngFor="let target of newGoal.memberTargets; let i=index" [class.odd-row]="i%2==0" (click)="onClickEditTarget(target)">
+          <ion-col class="text-color">{{target.memberName}}</ion-col>
+          <ion-col class="money">{{target.target| currency:'VND':'symbol':'0.0-0'}}</ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="more-member-button" (click)="onFindUser()">
+          <ion-icon name="ios-add-outline" style="font-weight: bold"></ion-icon>
+          <span>More Member</span>
+      </div>
+
+    </div>
+  </div>
+  <div class="blue-button-container" (click)="onClickSave()">
+      <div class="main-button">Save</div>
+  </div>
 </ion-content>

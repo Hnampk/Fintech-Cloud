@@ -33,21 +33,22 @@
                             <span>for</span>
                             <input type="text" [(ngModel)]="newGoal.name" placeholder="VD: Ha Long Trip">
                         </div>
-                        <div class="my-form">
+                        <!-- <div class="my-form">
                             <span>Currently you have</span>
                             <input type="number" [(ngModel)]="newGoal.currentSaving" min="0" step="1" placeholder="VD: 300.000">
                             <span style="color:gray">(vnd)</span>
-                        </div>
+                        </div> -->
                         <div class="my-form a3-container">
                             <div>You plan start from</div>
-                            <div style="min-width: 40px; border-bottom: 1px solid; margin: 0 10px" (click)="onClickStartDate()">{{newGoal.startDate | date: 'mediumDate'}}</div>
+                            <div style="min-width: 40px; border-bottom: 1px solid; margin: 0 10px" (click)="onClickStartDate()">{{newGoal.startDate
+                                | date: 'mediumDate'}}</div>
                             <div>to</div>
-                            <div style="min-width: 40px; border-bottom: 1px solid; margin: 0 10px" (click)="onClickEndDate()">{{newGoal.endDate | date: 'mediumDate'}}</div>
+                            <div style="min-width: 40px; border-bottom: 1px solid; margin: 0 10px" (click)="onClickEndDate()">{{newGoal.endDate
+                                | date: 'mediumDate'}}</div>
                         </div>
                     </div>
-                    <div class="button-container a3-container-center">
-                        <button ion-button class="bottom-button" full color="dark" (click)="onClickNext()"> Looks good!
-                            Next</button>
+                    <div class="blue-button-container" style="bottom: auto !important" (click)="onClickNext()">
+                        <div class="main-button">Looks good! Next</div>
                     </div>
                 </div>
             </ion-slide>
@@ -55,9 +56,13 @@
                 <div class="question">DO YOU HAVE A PARTNER?</div>
 
                 <div class="button-container a3-container-center">
-                    <button ion-button class="bottom-button" full color="dark" (click)="onClickConfirm()">Only me for
-                        this</button>
-                    <button ion-button class="bottom-button" full color="dark" (click)="onClickConfirm()">Yes, i have</button>
+
+                    <div class="blue-button-container" style="position: relative !important;" (click)="onClickConfirm()">
+                        <div class="main-button">Only me for this</div>
+                    </div>
+                    <div class="blue-button-container"  style="position: relative !important;"  (click)="onClickConfirm()">
+                        <div class="main-button">Yes, I have</div>
+                    </div>
                 </div>
             </ion-slide>
         </ion-slides>

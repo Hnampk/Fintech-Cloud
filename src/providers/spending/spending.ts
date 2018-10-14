@@ -15,22 +15,25 @@ export class SpendingProvider {
     console.log('Hello SpendingProvider Provider');
   }
 
-  createExpense(obj){
-    return this.http.post(API.ENDPOINT+"/spending", obj);
+  createExpense(obj) {
+    return this.http.post(API.ENDPOINT + "/spending", obj);
   }
 
-  getExpense(){
-    return this.http.get(API.ENDPOINT+'/spending?page=0&size=99999');
+  getExpense() {
+    return this.http.get(API.ENDPOINT + '/spending?page=0&size=99999');
   }
 
-  deleteExpense(id){
-    return this.http.delete(API.ENDPOINT+'/spending/'+id);
+  deleteExpense(id) {
+    return this.http.delete(API.ENDPOINT + '/spending/' + id);
   }
 
-  getExpenseDetail(id){
-    return this.http.get(API.ENDPOINT + '/spending/'+ id + '/detail');
+  getExpenseDetail(id) {
+    return this.http.get(API.ENDPOINT + '/spending/' + id + '/detail');
   }
 
+  saveExpenseDetail(id, data) {
+    return this.http.post(API.ENDPOINT + '/spending/' + id + '/detail', data);
+  }
   getUsers(){
     return this.http.get(API.ENDPOINT + '/user/');
   }

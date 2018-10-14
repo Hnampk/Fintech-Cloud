@@ -20,7 +20,7 @@ export class AddSpendPage {
   }
 
   bill: Bill;
-
+  expenseId: number;
   constructor(
     public navCtrl: NavController,
     public events: Events,
@@ -31,6 +31,7 @@ export class AddSpendPage {
     private modalCtrl: ModalController,
     private toastCtrl: ToastController) {
     this.bill = new Bill()
+    this.expenseId = this.navParams.get("expenseId");
   }
 
   tabBarElement;
@@ -121,12 +122,12 @@ export class AddSpendPage {
     let alert = this.alertCtrl.create({
       title: "Edit" + payment.owner.name + "\'s payment",
       inputs: [
-        {
-          name: 'mustPay',
-          placeholder: 'Must Pay?',
-          type: 'number',
-          value: payment.mustPay + ""
-        },
+        // {
+        //   name: 'mustPay',
+        //   placeholder: 'Must Pay?',
+        //   type: 'number',
+        //   value: payment.mustPay + ""
+        // },
         {
           name: 'hasPaid',
           placeholder: 'Has Paid?',
@@ -145,8 +146,10 @@ export class AddSpendPage {
         {
           text: 'Save',
           handler: data => {
+            data.mustPay = "0";
             if ((data.hasPaid != "") && (data.mustPay != "")) {
               payment.onResponseData("", data.mustPay, data.hasPaid);
+              this.caculate();
             }
             else {
               let index = this.bill.payments.indexOf(payment);
@@ -170,11 +173,11 @@ export class AddSpendPage {
     let alert = this.alertCtrl.create({
       title: "Payment of " + username,
       inputs: [
-        {
-          name: 'mustPay',
-          placeholder: 'Must Pay?',
-          type: 'number'
-        },
+        // {
+        //   name: 'mustPay',
+        //   placeholder: 'Must Pay?',
+        //   type: 'number'
+        // },
         {
           name: 'hasPaid',
           placeholder: 'Has Paid?',
@@ -192,11 +195,14 @@ export class AddSpendPage {
         {
           text: 'Save',
           handler: data => {
-            if ((data.hasPaid != "") && (data.mustPay != "")) {
+            data.mustPay = "0";
+            if ((data.hasPaid != "") && (data.mustPay != "")
+            ) {
               let payment = new Payment();
               payment.onResponseData("", data.mustPay, data.hasPaid);
               payment.setOwner({ id: userid, username: username });
               this.bill.payments.push(payment);
+              this.caculate();
             }
             else {
               let toast = this.mToastController.create({
@@ -212,6 +218,26 @@ export class AddSpendPage {
       ]
     });
     alert.present();
+  }
+  onClickAddSpend(){
+    let data = {
+      description: this.bill.name,
+      amount: this.bill.totalCost,
+      spendingId: this.expenseId,
+      involve: []
+    }
+    this.bill.payments.forEach(ele=>{
+      data.involve.push({
+        "hasPay": ele.hasPaid,
+        "mustPay": ele.mustPay,
+        "user": {
+          "id": ele.owner.id || 1
+        }
+      })
+    })
+    this.spendingPorvider.saveExpenseDetail(this.expenseId, data).subscribe(data=>{
+      this.navCtrl.pop();
+    })
   }
 
   onFindUser() {
@@ -229,5 +255,18 @@ export class AddSpendPage {
       }
     })
     modal.present();
+  }
+
+  caculate(){
+    let hasPaid:number =0;
+    this.bill.payments.forEach(ele=>{
+      hasPaid+=parseInt(ele.hasPaid+"");
+      console.log(hasPaid)
+    })
+    this.bill.totalCost = hasPaid;
+    this.bill.payments = this.bill.payments.map(ele=>{
+      ele.mustPay = (hasPaid/this.bill.payments.length);
+      return ele;
+    })
   }
 }

@@ -20,7 +20,7 @@ export class AddSpendPage {
   }
 
   bill: Bill;
-
+  expenseId: number;
   constructor(
     public navCtrl: NavController,
     public events: Events,
@@ -30,6 +30,7 @@ export class AddSpendPage {
     private spendingPorvider: SpendingProvider,
     private toastCtrl: ToastController) {
     this.bill = new Bill()
+    this.expenseId = this.navParams.get("expenseId");
   }
 
   tabBarElement;
@@ -221,5 +222,26 @@ export class AddSpendPage {
       ]
     });
     alert.present();
+  }
+  onClickAddSpend(){
+    let data = {
+      description: this.bill.name,
+      amount: this.bill.totalCost,
+      spendingId: this.expenseId,
+      involve: []
+    }
+    this.bill.payments.forEach(ele=>{
+      data.involve.push({
+        "hasPay": ele.hasPaid,
+        "mustPay": ele.mustPay,
+        "user": {
+          "id": ele.owner.id || 1
+        }
+      })
+    })
+    this.spendingPorvider.saveExpenseDetail(this.expenseId, data).subscribe(data=>{
+      console.log(data);
+    })
+    console.log(data)
   }
 }

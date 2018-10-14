@@ -22,7 +22,7 @@
                     <div class="a3-container">
                         <div class="goal-info text-color cus-title">
                             <div class="goal-name">{{goal.name}}</div>
-                            <div class="goal-more-info">due: {{goal.endDate}}</div>
+                            <div class="goal-more-info">due: {{goal.endDate | date:'dd/MM/yyyy'}}</div>
                             <div class="goal-more-info">{{goal.totalSaved}} was saved</div>
                         </div>
                         <div *ngIf="goal.membersArray.length >1" class="goal-icon a3-container-center a1-relative">

@@ -43,11 +43,11 @@ export class AddGoalPage {
   }
 
   isComplete() {
-    return this.newGoal.name
-      && this.newGoal.totalTarget
-      && this.newGoal.currentSaving
-      && this.newGoal.startDate
-      && this.newGoal.endDate
+    return (this.newGoal.name != "")
+      && (this.newGoal.totalTarget > -1)
+      && (this.newGoal.currentSaving > -1)
+      && (this.newGoal.startDate > 0)
+      && (this.newGoal.endDate > 0)
   }
 
   onClickBack() {
@@ -72,8 +72,22 @@ export class AddGoalPage {
   }
 
   onClickConfirm() {
-    let profileModal = this.modalCtrl.create("GoalCreatePage", { "goal": this.newGoal });
-    profileModal.present();
+
+    if (this.isComplete()) {
+      let profileModal = this.modalCtrl.create("GoalCreatePage", { "goal": this.newGoal });
+      profileModal.present();
+    }
+    else {
+      this.slides.slideTo(0, 500);
+      let toast = this.mToastController.create({
+        message: 'Please fill all the fields first',
+        duration: 2000,
+        position: 'bottom'
+      });
+
+      toast.present();
+    }
+
   }
 
   onCancelDatePicker() {
@@ -83,7 +97,7 @@ export class AddGoalPage {
     this.mDatas.onChooseStartDate = false;
   }
 
-  
+
   onClickStartDate() {
     this.onShowDatePicker();
     this.mDatas.onChooseStartDate = true;
@@ -103,12 +117,12 @@ export class AddGoalPage {
   onDatePickerChanged(data) {
     this.showTabbar();
     this.mDatas.isShowingDatePicker = false;
-    
-    if(this.mDatas.onChooseStartDate){
+
+    if (this.mDatas.onChooseStartDate) {
       this.newGoal.startDate = new Date(data['year'], data['month'] - 1, data['date']).getTime();
     }
-    
-    if(this.mDatas.onChooseEndDate){
+
+    if (this.mDatas.onChooseEndDate) {
       this.newGoal.endDate = new Date(data['year'], data['month'] - 1, data['date']).getTime();
     }
 
@@ -117,20 +131,20 @@ export class AddGoalPage {
     this.mDatas.onChooseStartDate = false;
   }
 
-  hideTabbar(){
-    if(this.tabBarElement && this.tabBarElement.classList.contains("show-tabbar")){
+  hideTabbar() {
+    if (this.tabBarElement && this.tabBarElement.classList.contains("show-tabbar")) {
       this.tabBarElement.classList.remove("show-tabbar")
     }
   }
 
-  showTabbar(){
-    if(this.tabBarElement && !this.tabBarElement.classList.contains("show-tabbar")){
+  showTabbar() {
+    if (this.tabBarElement && !this.tabBarElement.classList.contains("show-tabbar")) {
       this.tabBarElement.classList.add("show-tabbar")
     }
   }
 
-  fromMillisToDate(millis: number){
-    if(millis){
+  fromMillisToDate(millis: number) {
+    if (millis) {
       let date = new Date(millis);
       return (date.getDate() + 1) + "/" + date.getMonth() + "/" + date.getFullYear();
     }

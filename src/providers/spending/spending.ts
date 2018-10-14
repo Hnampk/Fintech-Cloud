@@ -31,4 +31,8 @@ export class SpendingProvider {
     return this.http.get(API.ENDPOINT + '/spending/'+ id + '/detail');
   }
 
+  getUsers(){
+    return this.http.get(API.ENDPOINT + '/user/');
+  }
+
 }

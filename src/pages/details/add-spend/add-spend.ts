@@ -1,7 +1,7 @@
 import { Bill, Payment } from './../../../providers/classes/expense';
 import { TabStore } from './../../../state/TabStore';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Events, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Events, AlertController, ModalController } from 'ionic-angular';
 import { TabsPage } from '../../tabs/tabs';
 import { SpendingProvider } from '../../../providers/spending/spending';
 
@@ -28,6 +28,7 @@ export class AddSpendPage {
     private alertCtrl: AlertController,
     private mToastController: ToastController,
     private spendingPorvider: SpendingProvider,
+    private modalCtrl: ModalController,
     private toastCtrl: ToastController) {
     this.bill = new Bill()
     this.expenseId = this.navParams.get("expenseId");
@@ -74,7 +75,6 @@ export class AddSpendPage {
   }
 
   onClickAddMember() {
-    this.presentPrompt();
   }
 
   onClickSave() {
@@ -117,17 +117,11 @@ export class AddSpendPage {
       this.tabBarElement.classList.add("show-tabbar")
     }
   }
-  
-  onEditPayment(payment:Payment){
-    let alert = this.alertCtrl.create({
-      title: "Edit member's payment",
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Who?',
-          value: payment.owner.name
 
-        },
+  onEditPayment(payment: Payment) {
+    let alert = this.alertCtrl.create({
+      title: "Edit" + payment.owner.name + "\'s payment",
+      inputs: [
         {
           name: 'mustPay',
           placeholder: 'Must Pay?',
@@ -152,17 +146,18 @@ export class AddSpendPage {
         {
           text: 'Save',
           handler: data => {
-            if(data.name != ""){        
+            if ((data.hasPaid != "") && (data.mustPay != "")) {
               payment.onResponseData("", data.mustPay, data.hasPaid);
-              payment.owner.name = data.name;
             }
-            else{
+            else {
+              let index = this.bill.payments.indexOf(payment);
+              this.bill.payments.splice(index, 1);
               let toast = this.mToastController.create({
-                message: 'Empty name!',
+                message: 'Empty!',
                 duration: 2000,
                 position: 'bottom'
               });
-        
+
               toast.present();
             }
           }
@@ -172,14 +167,10 @@ export class AddSpendPage {
     alert.present();
   }
 
-  presentPrompt() {
+  presentPrompt(userid, username) {
     let alert = this.alertCtrl.create({
-      title: "Add new member",
+      title: "Payment of " + username,
       inputs: [
-        {
-          name: 'name',
-          placeholder: 'Who?'
-        },
         {
           name: 'mustPay',
           placeholder: 'Must Pay?',
@@ -202,19 +193,19 @@ export class AddSpendPage {
         {
           text: 'Save',
           handler: data => {
-            if(data.name != ""){
-              let payment = new Payment();            
+            if ((data.hasPaid != "") && (data.mustPay != "")) {
+              let payment = new Payment();
               payment.onResponseData("", data.mustPay, data.hasPaid);
-              payment.owner.name = data.name;
+              payment.setOwner({ id: userid, username: username });
               this.bill.payments.push(payment);
             }
-            else{
+            else {
               let toast = this.mToastController.create({
-                message: 'Empty name!',
+                message: 'Empty!',
                 duration: 2000,
                 position: 'bottom'
               });
-        
+
               toast.present();
             }
           }
@@ -240,8 +231,23 @@ export class AddSpendPage {
       })
     })
     this.spendingPorvider.saveExpenseDetail(this.expenseId, data).subscribe(data=>{
-      console.log(data);
+      this.navCtrl.pop();
     })
-    console.log(data)
+  }
+
+  onFindUser() {
+    let modal = this.modalCtrl.create("OnFindUserPage", {});
+    modal.onWillDismiss(data => {
+      if (data) {
+        let user = data['user'];
+        
+        if(this.bill.payments.filter(payment=>{return payment.owner.id == user.id}).length > 0){
+          this.onEditPayment(this.bill.payments.filter(payment=>{return payment.owner.id == user.id})[0]);
+        }else{
+          this.presentPrompt(user.id, user.username);
+        }
+      }
+    })
+    modal.present();
   }
 }

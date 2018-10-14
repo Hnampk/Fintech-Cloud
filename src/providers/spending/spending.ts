@@ -34,4 +34,8 @@ export class SpendingProvider {
   saveExpenseDetail(id, data) {
     return this.http.post(API.ENDPOINT + '/spending/' + id + '/detail', data);
   }
+  getUsers(){
+    return this.http.get(API.ENDPOINT + '/user/');
+  }
+
 }

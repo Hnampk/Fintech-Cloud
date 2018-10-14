@@ -38,15 +38,21 @@ export class ExpenseDetailPage {
     }
 
 
+    
+  }
+
+  ionViewDidEnter(){
     this.spendingProvider.getExpenseDetail(this.mDatas.expenseId).subscribe((data: any) => {
       // this.spendingProvider.getExpenseDetail(23).subscribe((data: any) => {
+        if(!(data.length == this.bills.length)){
+          this.bills=[];
       data.forEach(bill => {
         let newBill = new Bill();
 
         newBill.onResponseData(bill.id, bill.description, bill.amount, bill.createdDate, bill.involve);
         this.bills.push(newBill)
       });
-
+        }
     })
   }
 
@@ -70,7 +76,8 @@ export class ExpenseDetailPage {
       }
       people[pay.owner.id]['paid'] += pay.hasPaid - pay.mustPay;
     })
-    var sortedPeople = Object.values(people).sort((personA, personB) => personA.paid - personB.paid);
+    
+    var sortedPeople = Object.keys(people).map(key => people[key]).sort((personA, personB) => personA.paid - personB.paid);
     var i = 0;
     var j = sortedPeople.length - 1;
     var debt;

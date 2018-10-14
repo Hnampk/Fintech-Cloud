@@ -15,10 +15,11 @@
     <div class="scan-bill a3-container-center a1-margin-top">
         <ion-icon name="ios-camera-outline"></ion-icon>
     </div>
-    <div class="a3-container-center" style="margin-top: 6px">Scan you bill for cost or</div>
-    <div class="a3-container-center" style="color: #4F6DFF; font-weight: bold; margin-top: 6px" (click)="onClickInput()">Input
-        yourself</div>
-
+    <!-- <div class="a3-container-center" style="margin-top: 6px">Scan you bill for cost or</div> -->
+    <!-- <div class="a3-container-center" style="color: #4F6DFF; font-weight: bold; margin-top: 6px" (click)="onClickInput()">Input
+        yourself</div> -->
+        <div class="text-color a3-container-center">Total Cost</div>
+        <div class="value a3-container-center">{{bill.totalCost | currency:'VND':'symbol':'0.0-0'}}</div>
     <ion-grid class="a1-margin-top">
         <ion-row class="first-row">
             <ion-col col-4 class="a3-container a3-justify-end">Who</ion-col>

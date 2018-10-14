@@ -87,8 +87,6 @@ export class ExpenseDetailPage {
       sortedPeople[j].paid -= debt;
       message +=`${sortedPeople[i].info.name} owes ${sortedPeople[j].info.name} $${debt}`;
       message += "<br/>"
-      console.log(`${sortedPeople[i].info.name} owes ${sortedPeople[j].info.name} $${debt}`);
-
       if (sortedPeople[i].paid === 0) {
         i++;
       }

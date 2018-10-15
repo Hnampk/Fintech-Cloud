@@ -85,7 +85,7 @@ export class ExpenseDetailPage {
       debt = Math.min(-(sortedPeople[i].paid), sortedPeople[j].paid)
       sortedPeople[i].paid += debt;
       sortedPeople[j].paid -= debt;
-      message +=`${sortedPeople[i].info.name} owes ${sortedPeople[j].info.name} $${debt}`;
+      message +=`${sortedPeople[i].info.name} owes ${sortedPeople[j].info.name} ${debt} vnd`;
       message += "<br/>"
       if (sortedPeople[i].paid === 0) {
         i++;
